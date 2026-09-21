@@ -6,7 +6,8 @@ Triển khai từ thư mục `work/camera-giaothong` (không deploy cả repo hu
 
 ## URL
 
-Điền sau lần `vercel --prod` đầu tiên.
+- Production: https://camera-giaothong.vercel.app
+- Source: https://github.com/anhxuanpham/camera-giaothong
 
 ## Deploy command
 

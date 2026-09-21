@@ -1,7 +1,7 @@
 {
   "framework": null,
-  "rewrites": [
-    {"source": "/(.*)", "destination": "/api"}
+  "routes": [
+    {"src": "/(.*)", "dest": "/api"}
   ],
   "functions": {
     "api/index.mjs": {
