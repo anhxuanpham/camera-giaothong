@@ -1,0 +1,11 @@
+{
+  "name": "camera-giaothong",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check assets/camera-core.mjs && node --check assets/camera-api.mjs && node --check assets/snapshot-loader.mjs && node --check assets/camera-app.mjs && node --check assets/vietnam-basemap.mjs && node --check assets/hanoi-live.mjs && node --check server.mjs && node --check nda-maps.mjs && node --check hanoi-vms.mjs && node --check public-origin.mjs && node --check api/index.mjs",
+    "start": "node server.mjs"
+  },
+  "engines": {"node": ">=20"}
+}

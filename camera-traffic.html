@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#172328">
+<meta name="description" content="Tìm tuyến ô tô, so sánh lộ trình và xem camera giao thông gần đường đi tại TP.HCM và Hà Nội.">
+<title>Camera Giao Thông</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23172328'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%2368d5db'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+<script defer src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<link rel="stylesheet" href="./assets/camera-traffic.css">
+<script type="module" src="./assets/camera-app.mjs"></script>
+</head>
+<body>
+<a class="skip-link" href="#from">Đến tìm đường</a>
+<header class="app-header">
+  <div class="brand"><h1>Camera Giao Thông</h1><p>TP.HCM · Quan sát trước khi đi</p></div>
+  <nav aria-label="Công cụ bản đồ">
+    <label class="city-select">Thành phố
+      <select id="citySelect" aria-label="Chọn thành phố">
+        <option value="hcm">TP.HCM</option>
+        <option value="hn">Hà Nội</option>
+      </select>
+    </label>
+    <button id="panelToggle" aria-controls="panel" aria-expanded="true">Lộ trình</button>
+    <button id="listToggle" aria-controls="sidebar" aria-expanded="false">Camera</button>
+    <label class="refresh-toggle"><input type="checkbox" id="autoRefresh"> Làm mới 15s</label>
+  </nav>
+</header>
+<main id="map" aria-label="Bản đồ giao thông. Dùng phím mũi tên để di chuyển." tabindex="0"></main>
+<div id="mapNotice" class="map-notice" role="status" hidden></div>
+<div id="mapPick" class="map-pick" hidden>
+  <p id="mapPickHint">Chạm vào bản đồ để chọn địa điểm.</p>
+  <button id="pickCenter">Chọn tâm bản đồ</button><button id="cancelPick">Hủy chọn</button>
+</div>
+<section id="panel" class="panel route-panel" aria-labelledby="routeHeading">
+  <div class="panel-head"><h2 id="routeHeading">Đi đâu hôm nay?</h2><button id="panelClose" aria-label="Thu gọn bảng lộ trình">Thu gọn</button></div>
+  <div class="panel-body">
+    <div class="source-status"><p id="basemapStatus" class="status" role="status">Đang chuẩn bị bản đồ NDA Maps…</p><button id="retryBasemap" disabled>Thử tải bản đồ lại</button></div>
+    <p class="muted intro">Tuyến ô tô và camera gần đường đi. Bạn tự đánh giá giao thông từ ảnh.</p>
+    <form id="routeForm" novalidate>
+      <div class="place-field">
+        <label for="from">Điểm đi · A</label>
+        <div class="input-row"><input id="from" placeholder="Chợ Bến Thành" autocomplete="off" aria-describedby="fromHint"><button type="button" id="fromSearch" aria-label="Tìm địa điểm đi">Tìm</button></div>
+        <div class="field-tools"><span id="fromHint" class="field-hint">Nhập tên rồi chọn kết quả.</span><button type="button" id="fromMap">Chọn trên bản đồ</button></div>
+        <ul id="fromResults" class="place-results" aria-label="Kết quả điểm đi" hidden></ul>
+      </div>
+      <div class="place-field">
+        <label for="to">Điểm đến · B</label>
+        <div class="input-row"><input id="to" placeholder="Nhà thờ Đức Bà Sài Gòn" autocomplete="off" aria-describedby="toHint"><button type="button" id="toSearch" aria-label="Tìm địa điểm đến">Tìm</button></div>
+        <div class="field-tools"><span id="toHint" class="field-hint">Nhập tên rồi chọn kết quả.</span><button type="button" id="toMap">Chọn trên bản đồ</button></div>
+        <ul id="toResults" class="place-results" aria-label="Kết quả điểm đến" hidden></ul>
+      </div>
+      <button class="primary full" id="routeBtn" type="submit">Tìm tuyến ô tô</button>
+    </form>
+    <p id="routeStatus" class="status" role="status" aria-live="polite"></p>
+    <section id="routeInfo" aria-label="Kết quả tìm đường" hidden>
+      <p id="routeEndpoints" class="route-endpoints"></p>
+      <p class="muted">Thời gian ước tính, chưa tính kẹt xe trực tiếp.</p>
+      <div id="routeOptions" class="route-options" aria-label="So sánh lộ trình"></div>
+      <p id="routeCameraCount" class="status"></p><p id="alternativesNote" class="muted"></p>
+      <div class="action-row"><button id="fitRoute">Xem tuyến trên bản đồ</button><button id="alongList">Camera gần tuyến</button></div>
+      <button id="saveFavBtn" class="full">Lưu lộ trình này</button>
+    </section>
+    <details id="favoriteSection"><summary>Lộ trình đã lưu <span id="favCount"></span></summary><div id="favList"></div></details>
+    <p id="storageStatus" class="status error" role="status"></p>
+  </div>
+</section>
+<section id="sidebar" class="panel camera-panel" aria-labelledby="cameraHeading" hidden>
+  <div class="panel-head"><h2 id="cameraHeading">Camera giao thông</h2><button id="sbClose" aria-label="Đóng danh sách camera">Đóng</button></div>
+  <div class="catalog-status"><p id="catalogStatus" role="status">Đang tải danh mục camera…</p><button id="retryCameras">Tải lại danh mục</button></div>
+  <div class="camera-filters">
+    <label for="cameraMode">Xem camera</label>
+    <select id="cameraMode"><option value="all">Tất cả / theo quận</option><option value="route">Dọc tuyến đã chọn</option><option value="pinned">Camera đã ghim</option></select>
+    <div id="districtField"><label for="distFilter">Quận / khu vực</label><select id="distFilter"><option value="">Tất cả quận / khu vực</option></select></div>
+    <label for="cameraSearch">Tìm tên đường, camera</label><input id="cameraSearch" type="search" placeholder="Ví dụ: nguyen huu tho">
+    <div class="action-row"><label class="check-label"><input id="showCameras" type="checkbox"> Hiện camera trên bản đồ</label></div>
+    <p id="listCount" class="muted" role="status"></p>
+  </div>
+  <div id="sbList" class="camera-list" aria-label="Danh sách camera"></div>
+  <button id="moreCameras" class="more-button" hidden>Xem thêm camera</button>
+</section>
+<dialog id="imageDialog" aria-labelledby="imageTitle">
+  <div class="viewer-head"><h2 id="imageTitle">Ảnh camera</h2><button id="imageClose" aria-label="Đóng ảnh lớn">Đóng ảnh</button></div>
+  <div id="imageContent"></div>
+</dialog>
+<dialog id="liveDialog" aria-labelledby="liveTitle">
+  <div class="viewer-head"><h2 id="liveTitle">Live camera</h2><button id="liveClose" aria-label="Đóng live">Đóng live</button></div>
+  <div id="liveContent"></div>
+</dialog>
+<noscript><p class="map-notice">Cần bật JavaScript để xem bản đồ và tìm đường.</p></noscript>
+</body>
+</html>

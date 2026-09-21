@@ -1,0 +1,14 @@
+node_modules/
+.vercel/
+.env
+.env.*
+!.env.example
+apktool_out/
+extracted/
+jadx_out/
+libs/
+*.apks
+*.apk
+*.log
+plans/
+.DS_Store

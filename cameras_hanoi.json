@@ -1,0 +1,690 @@
+[
+  {
+    "camera_id": "gm9SoV9AOg",
+    "name": "An Dương Vương-Đường Dẫn Cầu Nhật Tân - C149.08-PTZ",
+    "ward_name": "Phường Phú Thượng",
+    "lng": 105.8166046142578,
+    "lat": 21.0847244262695,
+    "ptz": true
+  },
+  {
+    "camera_id": "6dzhWhjjea",
+    "name": "BV Đống Đa-Nguyễn Lương Bằng - C128.08-PTZ",
+    "ward_name": "Phường Đống Đa",
+    "lng": 105.8278656005859,
+    "lat": 21.0150375366211,
+    "ptz": true
+  },
+  {
+    "camera_id": "P4DTimxZYF",
+    "name": "Bà Triệu - Nguyễn Du - C023.08-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.8493499755859,
+    "lat": 21.0187034606934,
+    "ptz": true
+  },
+  {
+    "camera_id": "UDCS8QDYlE",
+    "name": "Bà Triệu - Trần Nhân Tông - C024.08-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.8492584228516,
+    "lat": 21.0169868469238,
+    "ptz": true
+  },
+  {
+    "camera_id": "l66k0PRufD",
+    "name": "Bưởi - Hoàng Hoa Thám - C160.02-PTZ",
+    "ward_name": "Phường Ngọc Hà",
+    "lng": 105.806037902832,
+    "lat": 21.0475559234619,
+    "ptz": true
+  },
+  {
+    "camera_id": "c5zVU1XLiv",
+    "name": "Bạch Mai - Đại La - C139.14-PTZ",
+    "ward_name": "Phường Bạch Mai",
+    "lng": 105.8498992919922,
+    "lat": 20.9960117340088,
+    "ptz": true
+  },
+  {
+    "camera_id": "MnDLlXaXQd",
+    "name": "Chu Văn An - Lê Hồng Phong - C069.10-PTZ",
+    "ward_name": "Phường Ba Đình",
+    "lng": 105.8366317749023,
+    "lat": 21.0336532592773,
+    "ptz": true
+  },
+  {
+    "camera_id": "SW2nMH8tHx",
+    "name": "Chùa Bộc - HV Ngân Hàng - C133.06-PTZ",
+    "ward_name": "Phường Kim Liên",
+    "lng": 105.8279800415039,
+    "lat": 21.0077247619629,
+    "ptz": true
+  },
+  {
+    "camera_id": "NgNsMGnbYi",
+    "name": "Chùa Bộc - Tôn Thất Tùng  - C132.10-PTZ",
+    "ward_name": "Phường Kim Liên",
+    "lng": 105.8311767578125,
+    "lat": 21.0062503814697,
+    "ptz": true
+  },
+  {
+    "camera_id": "2K7dPnQPKE",
+    "name": "Cầu Giấy - Trần Quý Kiên - C167.10-PTZ",
+    "ward_name": "Phường Cầu Giấy",
+    "lng": 105.7914810180664,
+    "lat": 21.0358581542969,
+    "ptz": true
+  },
+  {
+    "camera_id": "nZOuhmboVy",
+    "name": "Giải Phóng - Trường Chinh - C105.15.PTZ",
+    "ward_name": "Phường Kim Liên",
+    "lng": 105.8412551879883,
+    "lat": 20.9978294372559,
+    "ptz": true
+  },
+  {
+    "camera_id": "nv8e4zhud5",
+    "name": "Giải Phóng - Tương Mai - C106.09-PTZ",
+    "ward_name": "Phường Tương Mai",
+    "lng": 105.8411865234375,
+    "lat": 20.9920024871826,
+    "ptz": true
+  },
+  {
+    "camera_id": "w9jAi3YdlZ",
+    "name": "Giải Phóng-B.Xe Phía Nam - C107.06-PTZ",
+    "ward_name": "Phường Hoàng Mai",
+    "lng": 105.8409423828125,
+    "lat": 20.9809379577637,
+    "ptz": true
+  },
+  {
+    "camera_id": "NT8HcxDW54",
+    "name": "Giải Phóng-Trương Định - C108.10-PTZ",
+    "ward_name": "Phường Hoàng Mai",
+    "lng": 105.8409118652344,
+    "lat": 20.9764461517334,
+    "ptz": true
+  },
+  {
+    "camera_id": "ktNrwCQMqi",
+    "name": "Giảng Võ-Trần Huy Liệu - C119.08-PTZ",
+    "ward_name": "Phường Ô Chợ Dừa",
+    "lng": 105.8230972290039,
+    "lat": 21.0263786315918,
+    "ptz": true
+  },
+  {
+    "camera_id": "7MIjAxXD5I",
+    "name": "Hai Bà Trưng - Bà Triệu - C008.08-PTZ",
+    "ward_name": "Phường Cửa Nam",
+    "lng": 105.8512954711914,
+    "lat": 21.0246868133545,
+    "ptz": true
+  },
+  {
+    "camera_id": "cC4iyXAxSQ",
+    "name": "Hai Bà Trưng - Phan Chu Trinh - C011.10-PTZ",
+    "ward_name": "Phường Cửa Nam",
+    "lng": 105.8566207885742,
+    "lat": 21.0231494903564,
+    "ptz": true
+  },
+  {
+    "camera_id": "JkHDQKZVAO",
+    "name": "Hoàng Quốc Việt - Nghĩa Tân - C162.14-PTZ",
+    "ward_name": "Phường Nghĩa Đô",
+    "lng": 105.7945861816406,
+    "lat": 21.046215057373,
+    "ptz": true
+  },
+  {
+    "camera_id": "FQXXu6Kii8",
+    "name": "Hoàng Quốc Việt - Nguyễn Phong Sắc - C163.12-PTZ",
+    "ward_name": "Phường Nghĩa Đô",
+    "lng": 105.7902755737305,
+    "lat": 21.0461826324463,
+    "ptz": true
+  },
+  {
+    "camera_id": "LeN3CYSjNg",
+    "name": "Hoàng Quốc Việt - Phạm Tuấn Tài - C164.08-PTZ",
+    "ward_name": "Phường Nghĩa Đô",
+    "lng": 105.7863540649414,
+    "lat": 21.0461559295654,
+    "ptz": true
+  },
+  {
+    "camera_id": "YTgiR097Mx",
+    "name": "Huỳnh Thúc Kháng - Nguyên Hồng - C136.10-PTZ",
+    "ward_name": "Phường Giảng Võ",
+    "lng": 105.8117752075195,
+    "lat": 21.0181350708008,
+    "ptz": true
+  },
+  {
+    "camera_id": "zaLCDNweru",
+    "name": "Hàm Tử Quan - Trần Quang Khải - C085.08-PTZ",
+    "ward_name": "Phường Hồng Hà",
+    "lng": 105.8567810058594,
+    "lat": 21.0313930511475,
+    "ptz": true
+  },
+  {
+    "camera_id": "DIqFcbe6Ni",
+    "name": "Hàng Bài - Hàm Long - C033.08-PTZ",
+    "ward_name": "Phường Cửa Nam",
+    "lng": 105.851936340332,
+    "lat": 21.0197525024414,
+    "ptz": true
+  },
+  {
+    "camera_id": "GDV0BON5SQ",
+    "name": "Kim Mã - Trụ sở Liên Hiệp Quốc - C075.08-PTZ",
+    "ward_name": "Phường Ngọc Hà",
+    "lng": 105.8161010742188,
+    "lat": 21.0306701660156,
+    "ptz": true
+  },
+  {
+    "camera_id": "LrwwDIVPq3",
+    "name": "Kim Mã - Vạn Bảo - C074.05-PTZ",
+    "ward_name": "Phường Ngọc Hà",
+    "lng": 105.8172302246094,
+    "lat": 21.0306739807129,
+    "ptz": true
+  },
+  {
+    "camera_id": "rWRkt5yGLw",
+    "name": "La Thành-Hoàng Cầu - C127.08-PTZ",
+    "ward_name": "Phường Ô Chợ Dừa",
+    "lng": 105.8258285522461,
+    "lat": 21.0212078094482,
+    "ptz": true
+  },
+  {
+    "camera_id": "dPgHp4M9cL",
+    "name": "Liễu Giai-Đội Cấn - C109.10-PTZ",
+    "ward_name": "Phường Ngọc Hà",
+    "lng": 105.8150329589844,
+    "lat": 21.0371417999268,
+    "ptz": true
+  },
+  {
+    "camera_id": "Vp3pns63LN",
+    "name": "Láng - Nguyễn Trãi - C157.06-PTZ",
+    "ward_name": "Phường Đống Đa",
+    "lng": 105.8201522827148,
+    "lat": 21.0031452178955,
+    "ptz": true
+  },
+  {
+    "camera_id": "GPNLSaRcxQ",
+    "name": "Láng - Yên Lãng - C156.08-PTZ",
+    "ward_name": "Phường Đống Đa",
+    "lng": 105.8142471313477,
+    "lat": 21.0089206695557,
+    "ptz": true
+  },
+  {
+    "camera_id": "SqFpBlpLa7",
+    "name": "Láng Hạ - Đường Láng - C123.10-PTZ",
+    "ward_name": "Phường Láng",
+    "lng": 105.8109283447266,
+    "lat": 21.0108013153076,
+    "ptz": true
+  },
+  {
+    "camera_id": "81njd5h6xe",
+    "name": "Lê Duẩn - Lý Thường Kiệt- C102.01.PTZ",
+    "ward_name": "Phường Cửa Nam",
+    "lng": 105.8415298461914,
+    "lat": 21.0259704589844,
+    "ptz": true
+  },
+  {
+    "camera_id": "RJVijQcEq4",
+    "name": "Lê Duẩn-Nguyễn Du - C103.06-PTZ",
+    "ward_name": "Phường Văn Miếu - Quốc Tử Giám",
+    "lng": 105.8413619995117,
+    "lat": 21.0205383300781,
+    "ptz": true
+  },
+  {
+    "camera_id": "OJUfIFhYyb",
+    "name": "Lê Văn Lương - Khuất Duy Tiến - C184.15-PTZ",
+    "ward_name": "Phường Đại Mỗ",
+    "lng": 105.7969284057617,
+    "lat": 20.9994487762451,
+    "ptz": true
+  },
+  {
+    "camera_id": "QA5ytyyGeA",
+    "name": "Lê Văn Lương-Hoàng Minh Giám - C125.10-PTZ",
+    "ward_name": "Phường Yên Hòa",
+    "lng": 105.8002548217773,
+    "lat": 21.0022525787354,
+    "ptz": true
+  },
+  {
+    "camera_id": "EN4zRMo7AU",
+    "name": "Lê Văn Lương-Hoàng Đạo Thúy - C124.10.PTZ",
+    "ward_name": "Phường Yên Hòa",
+    "lng": 105.8049850463867,
+    "lat": 21.0056457519531,
+    "ptz": true
+  },
+  {
+    "camera_id": "tMPHjyhHnN",
+    "name": "Lò Đúc - Hòa Mã - C047.10-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.8563537597656,
+    "lat": 21.0159664154053,
+    "ptz": true
+  },
+  {
+    "camera_id": "caKXqmv0rX",
+    "name": "Lò Đúc - Nguyễn Công Trứ - C048.10-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.8572769165039,
+    "lat": 21.0143585205078,
+    "ptz": true
+  },
+  {
+    "camera_id": "azf82KUtkz",
+    "name": "Lò Đúc - Phan Chu Trinh - C046.12-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.8550109863281,
+    "lat": 21.0183506011963,
+    "ptz": true
+  },
+  {
+    "camera_id": "X9fadPV3KS",
+    "name": "Lò Đúc - Yec Xanh - C049.07-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.858268737793,
+    "lat": 21.0127429962158,
+    "ptz": true
+  },
+  {
+    "camera_id": "TafBWXBVxo",
+    "name": "Lý Thường Kiệt - Hàng Bài - C035.10-PTZ",
+    "ward_name": "Phường Cửa Nam",
+    "lng": 105.8525924682617,
+    "lat": 21.0227031707764,
+    "ptz": true
+  },
+  {
+    "camera_id": "SAos5Epc7u",
+    "name": "Lý Thường Kiệt - Phan Chu Trinh - C044.10-PTZ",
+    "ward_name": "Phường Cửa Nam",
+    "lng": 105.8560943603516,
+    "lat": 21.0216312408447,
+    "ptz": true
+  },
+  {
+    "camera_id": "EKFL8mJzpA",
+    "name": "Lĩnh Nam - Vành Đai 3 - C191.15-PTZ",
+    "ward_name": "Phường Yên Sở",
+    "lng": 105.8891906738281,
+    "lat": 20.9795513153076,
+    "ptz": true
+  },
+  {
+    "camera_id": "TgIct2wkHM",
+    "name": "Lương Yên - Nguyễn Khoái - C092.06-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.8629989624023,
+    "lat": 21.0132789611816,
+    "ptz": true
+  },
+  {
+    "camera_id": "FjmgdBmzDV",
+    "name": "Lạc Long Quân - Thụy Khuê - C159.08-PTZ",
+    "ward_name": "Phường Tây Hồ",
+    "lng": 105.8064422607422,
+    "lat": 21.0486087799072,
+    "ptz": true
+  },
+  {
+    "camera_id": "pb4XibAT3n",
+    "name": "Minh Khai - Tam Trinh - C140.15.PTZ",
+    "ward_name": "Phường Tương Mai",
+    "lng": 105.8622741699219,
+    "lat": 20.9963245391846,
+    "ptz": true
+  },
+  {
+    "camera_id": "VTG2hAiJn2",
+    "name": "Nghiêm Xuân Yêm - Cầu Dậu - C186.14-PTZ",
+    "ward_name": "Phường Hoàng Liệt",
+    "lng": 105.824821472168,
+    "lat": 20.9707641601562,
+    "ptz": true
+  },
+  {
+    "camera_id": "sjUZaPpC67",
+    "name": "Nguyen Khanh Toan - Duong Quang Ham C077.PTZ",
+    "ward_name": "Phường Cầu Giấy",
+    "lng": 105.8018646240234,
+    "lat": 21.0369300842285,
+    "ptz": true
+  },
+  {
+    "camera_id": "D6m68TbYZK",
+    "name": "Nguyễn Hữu Thọ - Nghiêm Xuân Yêm - C187.15.PTZ",
+    "ward_name": "Phường Hoàng Liệt",
+    "lng": 105.8287506103516,
+    "lat": 20.9690265655518,
+    "ptz": true
+  },
+  {
+    "camera_id": "nqWo2e0IOO",
+    "name": "Nguyễn Văn Huyên - Nguyễn Khánh Toàn - C078.14-PTZ",
+    "ward_name": "Phường Cầu Giấy",
+    "lng": 105.7977676391602,
+    "lat": 21.0390453338623,
+    "ptz": true
+  },
+  {
+    "camera_id": "j4WFeQBHAl",
+    "name": "Ngô Quyền - Hàm Long - C040.08-PTZ",
+    "ward_name": "Phường Cửa Nam",
+    "lng": 105.8531646728516,
+    "lat": 21.0191593170166,
+    "ptz": true
+  },
+  {
+    "camera_id": "uhDEN1RsjQ",
+    "name": "Ngô Thì Nhậm - Hòa Mã - C043.08-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.8531494140625,
+    "lat": 21.0152339935303,
+    "ptz": true
+  },
+  {
+    "camera_id": "vgNwcZXCQS",
+    "name": "Ngô Thì Nhậm - Lê Văn Hưu - C041.08-PTZ",
+    "ward_name": "Phường Long Biên",
+    "lng": 105.9053192138672,
+    "lat": 21.0230140686035,
+    "ptz": true
+  },
+  {
+    "camera_id": "jFcEVi5rlc",
+    "name": "Ngô Thì Nhậm - Trần Xuân Soạn - C042.08-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.8529281616211,
+    "lat": 21.0167655944824,
+    "ptz": true
+  },
+  {
+    "camera_id": "b4GGduuN9k",
+    "name": "Núi Trúc - Kim Mã - C073.10-PTZ",
+    "ward_name": "Phường Giảng Võ",
+    "lng": 105.8216857910156,
+    "lat": 21.0312271118164,
+    "ptz": true
+  },
+  {
+    "camera_id": "7kqJ2f1i6N",
+    "name": "P.V.Đồng - Bến Xe Nam Thăng Long - C192.12-PTZ",
+    "ward_name": "Phường Đông Ngạc",
+    "lng": 105.7853469848633,
+    "lat": 21.0683937072754,
+    "ptz": true
+  },
+  {
+    "camera_id": "lSEfPocfyL",
+    "name": "Phan Đình Phùng - Cửa Bắc - C053.08-PTZ",
+    "ward_name": "Phường Ba Đình",
+    "lng": 105.8420104980469,
+    "lat": 21.0406322479248,
+    "ptz": true
+  },
+  {
+    "camera_id": "6SvJTzHJHU",
+    "name": "Phạm Hùng - TT Hội nghị Quốc Gia - C182.08-PTZ",
+    "ward_name": "Phường Từ Liêm",
+    "lng": 105.7922821044922,
+    "lat": 21.0052223205566,
+    "ptz": true
+  },
+  {
+    "camera_id": "LzI9Guhwa3",
+    "name": "Phạm Ngọc Thạch - Xã Đàn - C099.10-PTZ",
+    "ward_name": "Phường Văn Miếu - Quốc Tử Giám",
+    "lng": 105.837028503418,
+    "lat": 21.0111255645752,
+    "ptz": true
+  },
+  {
+    "camera_id": "n5lvgqGazG",
+    "name": "Phạm Văn Đồng - Xuân Đỉnh - C193.14-PTZ",
+    "ward_name": "Phường Xuân Đỉnh",
+    "lng": 105.7863540649414,
+    "lat": 21.0767307281494,
+    "ptz": true
+  },
+  {
+    "camera_id": "z0kges1574",
+    "name": "Quán Thánh - Cửa Bắc - C057.08-PTZ",
+    "ward_name": "Phường Ba Đình",
+    "lng": 105.8425979614258,
+    "lat": 21.0423946380615,
+    "ptz": true
+  },
+  {
+    "camera_id": "mfIy581Y0j",
+    "name": "Quán Thánh - Hàng Bún - C058.08-PTZ",
+    "ward_name": "Phường Ba Đình",
+    "lng": 105.8445892333984,
+    "lat": 21.0412483215332,
+    "ptz": true
+  },
+  {
+    "camera_id": "WY77ia5uZ7",
+    "name": "Quán Thánh - Nguyễn Biểu - C056.08-PTZ",
+    "ward_name": "Phường Ba Đình",
+    "lng": 105.8401489257812,
+    "lat": 21.0427913665771,
+    "ptz": true
+  },
+  {
+    "camera_id": "CstKntsGXL",
+    "name": "Trường Chinh - Tôn Thất Tùng - C137.15-PTZ",
+    "ward_name": "Phường Kim Liên",
+    "lng": 105.8290176391602,
+    "lat": 21.0007057189941,
+    "ptz": true
+  },
+  {
+    "camera_id": "WaD11xcPsG",
+    "name": "Trường Sa - Xuân Canh - C148.14-PTZ",
+    "ward_name": "Xã Đông Anh",
+    "lng": 105.8500671386719,
+    "lat": 21.1074676513672,
+    "ptz": true
+  },
+  {
+    "camera_id": "uOVKITVI3V",
+    "name": "Trần Hưng Đạo - Phan Huy Chú - C091.10-PTZ",
+    "ward_name": "Phường Cửa Nam",
+    "lng": 105.8569564819336,
+    "lat": 21.0195999145508,
+    "ptz": true
+  },
+  {
+    "camera_id": "x7ABwvVTrY",
+    "name": "Trần Khánh Dư - Cầu Đất - C088.06-PTZ",
+    "ward_name": "Phường Tây Hoa Lư",
+    "lng": 105.8605270385742,
+    "lat": 20.2412223815918,
+    "ptz": true
+  },
+  {
+    "camera_id": "F4SHEmLhX8",
+    "name": "Trần Khát Chân - Lò Đúc - C094.10-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.86083984375,
+    "lat": 21.0090427398682,
+    "ptz": true
+  },
+  {
+    "camera_id": "wFdFtqFVxx",
+    "name": "Trần Khát Chân - Lò Đúc - C094.11-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.86083984375,
+    "lat": 21.0090427398682,
+    "ptz": true
+  },
+  {
+    "camera_id": "XVnpHIggry",
+    "name": "Trần Khát Chân - Võ Thị Sáu - C095.12-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.8546905517578,
+    "lat": 21.0089244842529,
+    "ptz": true
+  },
+  {
+    "camera_id": "9xPFFAdlw9",
+    "name": "Trần Nhân Tông - Lê Duẩn - C104.08-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.8414001464844,
+    "lat": 21.0175170898438,
+    "ptz": true
+  },
+  {
+    "camera_id": "cE2YdJgY2u",
+    "name": "Trần Phú - Lê Trực - C067.07-PTZ",
+    "ward_name": "Phường Ba Đình",
+    "lng": 105.8330993652344,
+    "lat": 21.0322303771973,
+    "ptz": true
+  },
+  {
+    "camera_id": "Ex2rzm5Cp8",
+    "name": "Trần Phú - Nguyễn Văn Lộc - C175.12-PTZ",
+    "ward_name": "Phường Hà Đông",
+    "lng": 105.7898941040039,
+    "lat": 20.9819927215576,
+    "ptz": true
+  },
+  {
+    "camera_id": "e8cM6JMkKS",
+    "name": "Trần Quang Khải - Chương Dương Độ - C086.08-PTZ",
+    "ward_name": "Phường Hồng Hà",
+    "lng": 105.857795715332,
+    "lat": 21.0291862487793,
+    "ptz": true
+  },
+  {
+    "camera_id": "MMdFCpNOuf",
+    "name": "Tây Sơn - Hồ Đắc Di - C129.08-PTZ",
+    "ward_name": "Phường Đống Đa",
+    "lng": 105.8269195556641,
+    "lat": 21.0134830474854,
+    "ptz": true
+  },
+  {
+    "camera_id": "KyI4oBB59F",
+    "name": "Tây Sơn - Thái Thịnh - C130.08-PTZ",
+    "ward_name": "Phường Đống Đa",
+    "lng": 105.8225708007812,
+    "lat": 21.0057411193848,
+    "ptz": true
+  },
+  {
+    "camera_id": "oKDwxlQhwi",
+    "name": "Võ Văn Kiệt - Quang Minh - C194.10-PTZ",
+    "ward_name": "Xã Quang Minh",
+    "lng": 105.7806930541992,
+    "lat": 21.1945781707764,
+    "ptz": true
+  },
+  {
+    "camera_id": "TN3tftkQox",
+    "name": "Xã Đàn - Nam Đồng - C100.13-PTZ",
+    "ward_name": "Phường Văn Miếu - Quốc Tử Giám",
+    "lng": 105.8340606689453,
+    "lat": 21.0143032073975,
+    "ptz": true
+  },
+  {
+    "camera_id": "oSbmo63mhS",
+    "name": "Yên Phụ - Hàng Than - C084.08-PTZ",
+    "ward_name": "Phường Ba Đình",
+    "lng": 105.8472213745117,
+    "lat": 21.0436992645264,
+    "ptz": true
+  },
+  {
+    "camera_id": "79oPYPt7Fb",
+    "name": "Âu Cơ - Tứ Liên - C081.08-PTZ",
+    "ward_name": "Phường Hồng Hà",
+    "lng": 105.8321990966797,
+    "lat": 21.0628223419189,
+    "ptz": true
+  },
+  {
+    "camera_id": "AIObYbL8Tv",
+    "name": "Âu Cơ - UBND Nhật Tân - C079.06-PTZ",
+    "ward_name": "Phường Tây Hồ",
+    "lng": 105.8112411499023,
+    "lat": 21.0695114135742,
+    "ptz": true
+  },
+  {
+    "camera_id": "LNUg3W5Uvl",
+    "name": "Ô Chợ Dừa-Hoàng Cầu - C126.08-PTZ",
+    "ward_name": "Phường Ô Chợ Dừa",
+    "lng": 105.8255615234375,
+    "lat": 21.0207767486572,
+    "ptz": true
+  },
+  {
+    "camera_id": "MV9mayjJNy",
+    "name": "Đàm Quang Trung - Sân Golf Long Biên - C145.12-PTZ",
+    "ward_name": "Phường Long Biên",
+    "lng": 105.9002685546875,
+    "lat": 21.0317573547363,
+    "ptz": true
+  },
+  {
+    "camera_id": "frTkV08fFj",
+    "name": "Đại Cồ Việt - Hoa Lư - C098.10-PTZ",
+    "ward_name": "Phường Bạch Mai",
+    "lng": 105.84814453125,
+    "lat": 21.0082302093506,
+    "ptz": true
+  },
+  {
+    "camera_id": "5icahMAsE1",
+    "name": "Đại Cồ Việt - Trần Khát Chân - C096.11-PTZ",
+    "ward_name": "Phường Hai Bà Trưng",
+    "lng": 105.8513946533203,
+    "lat": 21.0087299346924,
+    "ptz": true
+  },
+  {
+    "camera_id": "TPyXWyMLa4",
+    "name": "Đội Cấn - Ngọc Hà - C070.10-PTZ",
+    "ward_name": "Phường Ba Đình",
+    "lng": 105.8317413330078,
+    "lat": 21.034423828125,
+    "ptz": true
+  },
+  {
+    "camera_id": "RwJ693VzXf",
+    "name": "Trần Đăng Ninh - Nguyễn Phong Sắc - C165.08-PTZ",
+    "ward_name": "Phường Cầu Giấy",
+    "lng": 105.7904510498047,
+    "lat": 21.040246963501,
+    "ptz": true
+  }
+]

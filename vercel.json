@@ -1,0 +1,12 @@
+{
+  "framework": null,
+  "rewrites": [
+    {"source": "/(.*)", "destination": "/api"}
+  ],
+  "functions": {
+    "api/index.mjs": {
+      "includeFiles": "{assets/**,cameras_full.json,cameras_hanoi.json,camera-traffic.html}",
+      "maxDuration": 60
+    }
+  }
+}

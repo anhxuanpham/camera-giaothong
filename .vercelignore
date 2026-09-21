@@ -1,0 +1,15 @@
+apktool_out
+extracted
+jadx_out
+libs
+*.apks
+*.apk
+*.log
+plans
+tests
+docs
+.git
+.DS_Store
+.env
+.env.*
+node_modules
