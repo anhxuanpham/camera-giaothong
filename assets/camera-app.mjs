@@ -1,4 +1,4 @@
-import {CAMERA_RADIUS_METERS, CITY_NEAR_KM, FAVORITES_KEY, PINS_KEY, CITY_KEY, CITIES, normalizeCity, nearestCity, geolocationMessage, validCoordinates, normalizeFavorites, normalizePins, favoriteKey,
+import {CAMERA_RADIUS_METERS, CITY_NEAR_KM, FAVORITES_KEY, PINS_KEY, CITY_KEY, CITIES, normalizeCity, normalizeText, nearestCity, geolocationMessage, validCoordinates, normalizeFavorites, normalizePins, favoriteKey,
   readStored, writeStored, camerasAlongRoute, filterCameraRows, LatestRequest, safeHanoiLiveUrl, hanoiCameraId} from './camera-core.mjs';
 import {loadCatalog, searchPlaces, resolvePlace, getRoutes} from './camera-api.mjs';
 import {SnapshotLoader, SnapshotRefresh} from './snapshot-loader.mjs';
@@ -280,76 +280,31 @@ $('liveDialog').addEventListener('close', () => {
   $('listToggle').focus();
 });
 
-const wallJobs = new Map();
-let wallObserver, wallRunning = 0;
-function wallParallel() { return state.city === 'hn' ? 2 : 8; }
-function stopWall() {
-  wallObserver?.disconnect();
-  for (const job of wallJobs.values()) job.loader.stop?.();
-  wallJobs.clear();
-  wallRunning = 0;
-}
-function pumpWall() {
-  while (wallRunning < wallParallel()) {
-    const job = [...wallJobs.values()].find(item => item.wanted && !item.started);
-    if (!job) return;
-    job.started = true;
-    wallRunning += 1;
-    job.loader.start();
-  }
-}
+function stopWall() {}
 function renderWall() {
-  if (!$('wallDialog').open) return;
   const query = normalizeText($('wallSearch').value);
   const cameras = state.cameras.filter(camera => !query || normalizeText(`${camera.name} ${camera.district || ''}`).includes(query));
-  $('wallCount').textContent = state.city === 'hn'
-    ? `${cameras.length} camera. Hà Nội tải chậm, tối đa 40 ảnh/phút.`
-    : `${cameras.length} camera`;
-  stopWall();
+  $('wallCount').textContent = `${cameras.length} camera`;
   const grid = $('wallGrid');
-  wallObserver = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      const job = wallJobs.get(entry.target.dataset.id);
-      if (!job) continue;
-      job.wanted = entry.isIntersecting;
-      if (!entry.isIntersecting && job.started) {
-        job.started = false;
-        wallRunning = Math.max(0, wallRunning - 1);
-        job.loader.stop();
-        pumpWall();
-      }
-    }
-    pumpWall();
-  }, {root: grid, rootMargin: '240px'});
   const fragment = document.createDocumentFragment();
   for (const camera of cameras) {
     const tile = button('', () => openImage(camera), 'wall-tile');
     tile.dataset.id = camera.id;
     const frame = element('div', 'snapshot-frame');
-    const placeholder = element('p', 'empty', 'Đang chờ ảnh…');
-    frame.append(placeholder);
+    if (camera.snapshotUrl) {
+      const image = element('img');
+      image.alt = `Ảnh giao thông: ${camera.name}`;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      image.src = camera.snapshotUrl;
+      image.addEventListener('error', () => { image.replaceWith(element('p', 'empty', 'Không có ảnh')); });
+      frame.append(image);
+    } else frame.append(element('p', 'empty', 'Không có ảnh'));
     tile.append(frame, element('span', '', camera.name), element('small', '', camera.district || 'Chưa rõ khu vực'));
-    let image;
-    const loader = camera.snapshotUrl ? new SnapshotLoader({url: camera.snapshotUrl, onState: next => {
-      if (next.src && next.image && next.image !== image) {
-        next.image.alt = `Ảnh giao thông: ${camera.name}`;
-        image?.replaceWith(next.image);
-        if (!image) placeholder.replaceWith(next.image);
-        image = next.image;
-      }
-      if ((next.status === 'ready' || next.status === 'error') && wallJobs.get(camera.id)?.started) {
-        wallJobs.get(camera.id).started = false;
-        wallRunning = Math.max(0, wallRunning - 1);
-        pumpWall();
-      }
-      if (next.status === 'error' && !next.src) placeholder.textContent = 'Không có ảnh';
-    }}) : {start() {}, stop() {}};
-    wallJobs.set(camera.id, {loader, wanted: false, started: false});
     fragment.append(tile);
   }
   if (!cameras.length) fragment.append(element('p', 'empty', state.catalogLoading ? 'Đang tải danh mục…' : 'Không có camera.'));
   grid.replaceChildren(fragment);
-  for (const tile of grid.querySelectorAll('.wall-tile')) wallObserver.observe(tile);
 }
 function openWall() {
   $('wallDialog').showModal();
