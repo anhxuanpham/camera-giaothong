@@ -63,6 +63,7 @@ test('only app assets and key-free map configuration are exposed', async () => {
     assert.match(html, /Camera Giao Thông/);
     assert.match(html, />William</);
     assert.match(html, /https:\/\/will\.id\.vn/);
+    assert.match(html, /id="pickHere"/);
     assert.equal(html.includes('soi lỗ hổng'), false);
     assert.match((await fetch(base + '/assets/camera-app.mjs')).headers.get('content-type'), /javascript/);
   });

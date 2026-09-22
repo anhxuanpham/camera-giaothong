@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {normalizeText, safeSnapshotUrl, safeHanoiSnapshotUrl, safeHanoiLiveUrl, hanoiCameraId, normalizeCameras, normalizeHanoiCameras, normalizeCity, normalizePlaceSuggestions, normalizePlaceDetail, normalizeRoutes, camerasAlongRoute,
+import {normalizeText, safeSnapshotUrl, safeHanoiSnapshotUrl, safeHanoiLiveUrl, hanoiCameraId, normalizeCameras, normalizeHanoiCameras, normalizeCity, nearestCity, geolocationMessage, CITY_NEAR_KM, normalizePlaceSuggestions, normalizePlaceDetail, normalizeRoutes, camerasAlongRoute,
   filterCameraRows, normalizeFavorites, normalizePins, readStored, writeStored, favoriteKey, LatestRequest} from '../assets/camera-core.mjs';
 
 const rawCamera = {_id: 'camera-1', name: 'Nguyễn Hữu Thọ', dist: 'Nhà Bè', loc: {coordinates: [106.7, 10.7]}, liveviewUrl: 'cameras/camera-1/snapshot'};
@@ -48,6 +48,18 @@ test('Hanoi catalog prefixes IDs, uses ward as district and only local snapshot 
   assert.throws(() => normalizeHanoiCameras({}), /định dạng/);
   assert.throws(() => normalizeHanoiCameras([null]), /hợp lệ/);
   assert.equal(normalizeCity('hn'), 'hn'); assert.equal(normalizeCity('hue'), 'hcm');
+});
+test('nearest city picks HCM or Hanoi from coordinates and maps geolocation errors', () => {
+  assert.equal(nearestCity(10.78, 106.70).id, 'hcm');
+  assert.ok(nearestCity(10.78, 106.70).km < 5);
+  assert.equal(nearestCity(21.0285, 105.8542).id, 'hn');
+  assert.equal(nearestCity(10.82, 106.63).id, 'hcm');
+  assert.equal(nearestCity(21.04, 105.80).id, 'hn');
+  assert.equal(nearestCity(NaN, 106), null);
+  assert.ok(CITY_NEAR_KM >= 50);
+  assert.match(geolocationMessage({code: 1}), /cho phép vị trí/);
+  assert.match(geolocationMessage({code: 3}), /Hết thời gian/);
+  assert.match(geolocationMessage({code: 2}), /Chưa lấy được/);
 });
 test('snapshot URL rejects foreign origins, paths, credentials and attribute injection', () => {
   assert.ok(safeSnapshotUrl('cameras/camera-1/snapshot', 'camera-1'));

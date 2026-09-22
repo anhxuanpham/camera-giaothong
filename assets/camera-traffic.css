@@ -102,6 +102,10 @@ summary { min-height: 44px; padding-block: var(--s3); font-size: .875rem; }
 .camera-marker { background: var(--surface); color: var(--text); border: 2px solid var(--text); border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; }
 .camera-marker.along { background: var(--accent); color: var(--ink); border-color: var(--ink); }
 .endpoint-marker { background: var(--bg); color: var(--accent); border: 2px solid var(--accent); border-radius: var(--small-radius); display: grid; place-items: center; font-weight: 700; }
+.here-marker { background: var(--accent); border: 3px solid var(--text); border-radius: 50%; }
+.locate-control { width: 44px; min-height: 44px; padding: var(--s1); font-size: .6875rem; line-height: 1.15; white-space: normal; background: var(--surface); color: var(--text); border: 0; border-radius: 2px; }
+.locate-control:hover:not(:disabled) { background: var(--raised); color: var(--accent); transform: none; }
+.here-popup p { margin-bottom: var(--s2); font-size: .875rem; }
 .leaflet-container { font-family: var(--font); }
 .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--surface); color: var(--text); box-shadow: none; }
 .leaflet-popup-content-wrapper { border-radius: var(--radius); }
@@ -109,7 +113,7 @@ summary { min-height: 44px; padding-block: var(--s3); font-size: .875rem; }
 .leaflet-container a.leaflet-popup-close-button { color: var(--text); width: 36px; height: 36px; padding: var(--s1); }
 .leaflet-control-zoom a { background: var(--surface); color: var(--text); width: 44px; height: 44px; line-height: 44px; }
 .leaflet-control-zoom a:hover { background: var(--raised); color: var(--accent); }
-@media (min-width: 761px) { .camera-panel-open .leaflet-control-zoom { margin-right: calc(var(--panel-width) + 24px); } }
+@media (min-width: 761px) { .camera-panel-open .leaflet-top.leaflet-right { margin-right: calc(var(--panel-width) + 24px); } }
 .camera-view h3 { margin: 0 var(--s6) var(--s1) 0; font-size: .9375rem; line-height: 1.4; }
 .camera-view .snapshot-frame { margin-top: var(--s3); background: var(--bg); border-radius: var(--small-radius); overflow: hidden; min-height: 160px; display: grid; place-items: center; }
 .snapshot-frame img { display: block; width: 100%; max-height: 220px; object-fit: contain; }

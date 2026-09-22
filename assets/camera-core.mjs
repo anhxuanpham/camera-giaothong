@@ -9,6 +9,26 @@ export const CITIES = {
     fromPlaceholder: 'Hồ Hoàn Kiếm', toPlaceholder: 'Ga Hà Nội'}
 };
 export const normalizeCity = value => value === 'hn' ? 'hn' : 'hcm';
+export const CITY_NEAR_KM = 80;
+
+export function nearestCity(lat, lon) {
+  if (!validCoordinates(lon, lat)) return null;
+  let id = 'hcm', km = Infinity;
+  for (const city of Object.values(CITIES)) {
+    const [clat, clon] = city.center;
+    const yScale = Math.PI * 6371 / 180;
+    const xScale = yScale * Math.cos(((lat + clat) / 2) * Math.PI / 180);
+    const d = Math.hypot((lon - clon) * xScale, (lat - clat) * yScale);
+    if (d < km) { km = d; id = city.id; }
+  }
+  return {id, km};
+}
+
+export function geolocationMessage(error) {
+  if (error?.code === 1) return 'Cần cho phép vị trí trong trình duyệt.';
+  if (error?.code === 3) return 'Hết thời gian lấy vị trí. Thử lại.';
+  return 'Chưa lấy được vị trí hiện tại.';
+}
 
 const text = value => typeof value === 'string' ? value.trim().slice(0, 1000) : '';
 export const normalizeText = value => text(value).normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/đ/gi, 'd').toLocaleLowerCase('vi');

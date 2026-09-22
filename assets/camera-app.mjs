@@ -1,4 +1,4 @@
-import {CAMERA_RADIUS_METERS, FAVORITES_KEY, PINS_KEY, CITY_KEY, CITIES, normalizeCity, normalizeFavorites, normalizePins, favoriteKey,
+import {CAMERA_RADIUS_METERS, CITY_NEAR_KM, FAVORITES_KEY, PINS_KEY, CITY_KEY, CITIES, normalizeCity, nearestCity, geolocationMessage, validCoordinates, normalizeFavorites, normalizePins, favoriteKey,
   readStored, writeStored, camerasAlongRoute, filterCameraRows, LatestRequest, safeHanoiLiveUrl, hanoiCameraId} from './camera-core.mjs';
 import {loadCatalog, searchPlaces, resolvePlace, getRoutes} from './camera-api.mjs';
 import {SnapshotLoader, SnapshotRefresh} from './snapshot-loader.mjs';
@@ -31,7 +31,7 @@ const placeRequests = {from: new LatestRequest(), to: new LatestRequest()};
 const refresh = new SnapshotRefresh();
 refresh.setVisible(!document.hidden);
 const popupViews = new WeakMap();
-let map, routeLayers, endpointLayers, alongLayers, cameraLayer, temporaryMarker, dialogView, dialogCamera, noticeTimer, picking, liveSession;
+let map, routeLayers, endpointLayers, alongLayers, cameraLayer, temporaryMarker, dialogView, dialogCamera, noticeTimer, picking, liveSession, hereMarker, locating;
 let currentPopup = null, basemap, basemapReady = false;
 
 function routeStatus(message, error = false) {
@@ -69,6 +69,18 @@ function initMap() {
   map = L.map('map', {zoomControl: false, minZoom: 1, maxZoom: 19,
     maxBounds: [[-85, -180], [85, 180]], maxBoundsViscosity: 1}).setView(CITIES[state.city].center, CITIES[state.city].zoom);
   L.control.zoom({position: 'topright'}).addTo(map);
+  map.addControl(new (L.Control.extend({
+    options: {position: 'topright'},
+    onAdd() {
+      const bar = L.DomUtil.create('div', 'leaflet-bar leaflet-control locate-bar');
+      const btn = L.DomUtil.create('button', 'locate-control', bar);
+      btn.type = 'button'; btn.id = 'locateMe'; btn.textContent = 'Vị trí';
+      btn.setAttribute('aria-label', 'Hiện vị trí của tôi trên bản đồ');
+      L.DomEvent.disableClickPropagation(bar);
+      L.DomEvent.on(btn, 'click', event => { L.DomEvent.stop(event); void showHere(Boolean(picking)); });
+      return bar;
+    }
+  }))());
   basemap = new VietnamBasemap(map, status => {
     basemapReady = status.ready;
     $('basemapStatus').textContent = status.message;
@@ -448,6 +460,53 @@ function beginMapPick(field) {
   $('mapPickHint').textContent = `Chọn ${field === 'from' ? 'điểm đi A' : 'điểm đến B'}: chạm bản đồ hoặc di chuyển bằng phím mũi tên rồi chọn tâm bản đồ.`;
   $('mapPick').hidden = false; $('map').classList.add('picking'); $('map').focus();
 }
+function herePlace(lat, lon) {
+  return {lat, lon, label: 'Vị trí hiện tại', address: 'Từ GPS thiết bị'};
+}
+function placeHereMarker(lat, lon) {
+  if (!map) return;
+  hereMarker?.remove();
+  hereMarker = L.marker([lat, lon], {
+    title: 'Vị trí của bạn', alt: 'Vị trí của bạn', zIndexOffset: 800,
+    icon: L.divIcon({className: 'here-marker', iconSize: [16, 16], iconAnchor: [8, 8]})
+  });
+  const body = element('div', 'here-popup');
+  body.append(element('p', '', 'Vị trí của bạn'));
+  body.append(button('Làm điểm đi A', () => {
+    choosePlace('from', herePlace(lat, lon));
+    map.closePopup(); setPanel('panel', true); $('from').focus();
+  }));
+  hereMarker.bindPopup(body).addTo(map);
+}
+function showHere(asPick = false) {
+  if (!map) return;
+  if (!navigator.geolocation) { notice('Trình duyệt không hỗ trợ vị trí.'); return; }
+  if (locating) return;
+  locating = true;
+  const btn = $('locateMe');
+  if (btn) btn.disabled = true;
+  notice('Đang lấy vị trí…');
+  navigator.geolocation.getCurrentPosition(position => {
+    locating = false;
+    if (btn) btn.disabled = false;
+    const lat = position.coords.latitude, lon = position.coords.longitude;
+    if (!validCoordinates(lon, lat)) { notice('Tọa độ GPS không hợp lệ.'); return; }
+    if (asPick && picking) {
+      placeHereMarker(lat, lon);
+      completeMapPick({lat, lng: lon});
+      return;
+    }
+    const near = nearestCity(lat, lon);
+    if (near && near.id !== state.city && near.km <= CITY_NEAR_KM) setCity(near.id, {fit: false});
+    placeHereMarker(lat, lon);
+    map.setView([lat, lon], 16, {animate: false});
+    $('mapNotice').hidden = true;
+  }, error => {
+    locating = false;
+    if (btn) btn.disabled = false;
+    notice(geolocationMessage(error));
+  }, {enableHighAccuracy: true, timeout: 12000, maximumAge: 15000});
+}
 function completeMapPick(latlng) {
   const field = picking;
   if (!field) return;
@@ -575,6 +634,7 @@ for (const field of ['from', 'to']) {
 }
 $('cancelPick').addEventListener('click', () => { cancelMapPick(); setPanel('panel', true, true); });
 $('pickCenter').addEventListener('click', () => { if (map) completeMapPick(map.getCenter()); });
+$('pickHere').addEventListener('click', () => { void showHere(true); });
 $('fitRoute').addEventListener('click', () => { collapsePanels(); fitSelectedRoute(); $('map').focus(); });
 $('alongList').addEventListener('click', () => { $('cameraMode').value = 'route'; $('cameraSearch').value = ''; state.listLimit = 40; setPanel('sidebar', true); renderCameraLayer(); });
 $('saveFavBtn').addEventListener('click', saveFavorite);
@@ -618,7 +678,7 @@ function applyCityChrome() {
   $('from').placeholder = city.fromPlaceholder;
   $('to').placeholder = city.toPlaceholder;
 }
-function setCity(city) {
+function setCity(city, {fit = true} = {}) {
   const next = normalizeCity(city);
   if (next === state.city && state.catalog) return;
   if ($('liveDialog').open) $('liveDialog').close();
@@ -627,7 +687,7 @@ function setCity(city) {
   const error = writeStored(storage, CITY_KEY, next);
   storageError(error);
   applyCityChrome();
-  map?.setView(CITIES[next].center, CITIES[next].zoom);
+  if (fit) map?.setView(CITIES[next].center, CITIES[next].zoom);
   state.cameras = []; state.catalog = null; state.catalogError = '';
   invalidateRoute(); renderDistricts(); renderSidebar(); renderCameraLayer(); renderAlongMarkers();
   void reloadCameras();
