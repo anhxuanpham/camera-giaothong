@@ -2,6 +2,8 @@
 
 Ứng dụng web của [William](https://will.id.vn) ([GitHub](https://github.com/anhxuanpham), [LinkedIn](https://www.linkedin.com/in/26thmay/)) để chọn tuyến ô tô và xem camera giao thông gần đường đi tại **TP.HCM** và **Hà Nội**. Người dùng tự đánh giá tình hình từ ảnh; ứng dụng không đo mức độ ùn tắc. Bản công khai: [camera-giaothong.vercel.app](https://camera-giaothong.vercel.app).
 
+Nút **Tường** mở một khung lưới toàn bộ camera của thành phố đang chọn. Chỉ ô đang thấy (và gần đó) mới tải ảnh. Bấm một ô để xem lớn. Hà Nội vẫn giới hạn 40 ảnh/phút.
+
 Nút **Vị trí** góc phải bản đồ lấy GPS, hiện chấm vị trí, kéo bản đồ tới đó. Gần Hà Nội thì đổi thành phố. Trong lúc chọn điểm A/B có **Vị trí hiện tại**. Trình duyệt sẽ hỏi quyền vị trí.
 
 Chọn thành phố trên thanh công cụ. HCM dùng ảnh snapshot Notis. Hà Nội lấy danh mục public của CDS (`video-wall-cameras-v2`, ~86 camera). Máy chủ local bắt luồng VMS WebSocket Viettel (`wss://rec0Xihanoi.vtscloud.vn/evup/{token}/{channel}` + tin nhắn `mobile:{token}`): **một khung JPEG** (`/api/hanoi/snapshot/{id}`) và **live fMP4** (`/api/hanoi/live/{id}`, transcode H.264 baseline cho MediaSource). Token VMS không gửi ra trình duyệt. Nút **Xem live** trên camera Hà Nội. Một live tại một thời điểm. Chi tiết hợp đồng: [API camera Hà Nội](hanoi-camera-api.md).

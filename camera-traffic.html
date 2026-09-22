@@ -42,6 +42,7 @@
     </label>
     <button id="panelToggle" aria-controls="panel" aria-expanded="true">Lộ trình</button>
     <button id="listToggle" aria-controls="sidebar" aria-expanded="false">Camera</button>
+    <button id="wallToggle" aria-controls="wallDialog" aria-expanded="false">Tường</button>
     <label class="refresh-toggle"><input type="checkbox" id="autoRefresh"> Làm mới 15s</label>
   </nav>
 </header>
@@ -105,6 +106,15 @@
 <dialog id="liveDialog" aria-labelledby="liveTitle">
   <div class="viewer-head"><h2 id="liveTitle">Live camera</h2><button id="liveClose" aria-label="Đóng live">Đóng live</button></div>
   <div id="liveContent"></div>
+</dialog>
+<dialog id="wallDialog" aria-labelledby="wallTitle">
+  <div class="viewer-head"><h2 id="wallTitle">Tường camera</h2><button id="wallClose" aria-label="Đóng tường camera">Đóng</button></div>
+  <div class="wall-tools">
+    <label for="wallSearch">Lọc tên</label>
+    <input id="wallSearch" type="search" placeholder="Tên đường hoặc camera">
+    <p id="wallCount" class="muted" role="status"></p>
+  </div>
+  <div id="wallGrid" class="wall-grid"></div>
 </dialog>
 <noscript><p class="map-notice">Cần bật JavaScript để xem bản đồ và tìm đường.</p></noscript>
 </body>

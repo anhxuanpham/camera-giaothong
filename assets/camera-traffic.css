@@ -187,11 +187,23 @@ summary { min-height: 44px; padding-block: var(--s3); font-size: .875rem; font-w
 .camera-view .capture-note { margin-top: var(--s1); }
 .camera-actions { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s3); }
 .camera-actions button { flex: 1; font-size: .8125rem; }
-#imageDialog, #liveDialog {
+#imageDialog, #liveDialog, #wallDialog {
   width: min(1000px, calc(100% - 32px)); max-height: calc(100dvh - 32px); padding: 0;
   background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: var(--radius); overflow: auto;
 }
-#imageDialog::backdrop, #liveDialog::backdrop { background: oklch(6% .02 255 / .72); }
+#wallDialog { width: min(1440px, calc(100% - 16px)); height: calc(100dvh - 16px); max-height: calc(100dvh - 16px); display: none; flex-direction: column; overflow: hidden; }
+#wallDialog[open] { display: flex; }
+#imageDialog::backdrop, #liveDialog::backdrop, #wallDialog::backdrop { background: oklch(6% .02 255 / .72); }
+.wall-tools { display: flex; align-items: center; gap: var(--s2); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex: none; }
+.wall-tools label { flex: none; color: var(--muted); }
+.wall-tools input { flex: 1; }
+.wall-tools p { flex: none; white-space: nowrap; }
+.wall-grid { flex: 1; overflow: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--s2); padding: var(--s3); align-content: start; }
+.wall-tile { display: grid; gap: var(--s1); padding: 0 0 var(--s2); text-align: left; background: var(--bg); overflow: hidden; min-width: 0; }
+.wall-tile .snapshot-frame { min-height: 0; aspect-ratio: 16 / 9; margin: 0; border: 0; border-radius: 0; }
+.wall-tile img { max-height: none; height: 100%; object-fit: cover; }
+.wall-tile span, .wall-tile small { display: block; padding-inline: var(--s2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wall-tile small { color: var(--muted); font-size: .75rem; font-weight: 500; }
 #imageContent, #liveContent { padding: var(--s4); }
 #imageDialog .snapshot-frame img { max-height: 60dvh; }
 #imageDialog .snapshot-frame { min-height: 200px; }
@@ -216,6 +228,8 @@ summary { min-height: 44px; padding-block: var(--s3); font-size: .875rem; font-w
   .panel-head { position: sticky; top: 0; z-index: 1; }
   .leaflet-popup-content { width: 252px !important; }
   #imageDialog, #liveDialog { width: calc(100% - 16px); max-height: calc(100dvh - 16px); }
+  #wallDialog { width: 100%; height: 100dvh; max-height: 100dvh; border-radius: 0; }
+  .wall-grid { grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); }
 }
 @media (max-height: 560px) {
   :root { --header-height: 64px; }

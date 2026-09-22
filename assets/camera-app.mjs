@@ -244,7 +244,7 @@ $('imageDialog').addEventListener('close', () => {
   if (dialogView) refresh.remove(dialogView.loader);
   dialogView = null;
   const camera = dialogCamera; dialogCamera = null;
-  if ($('liveDialog').open) return;
+  if ($('liveDialog').open || $('wallDialog').open) return;
   if (camera && map && basemapReady) openCamera(camera);
   else $('listToggle').focus();
 });
@@ -279,6 +279,95 @@ $('liveDialog').addEventListener('close', () => {
   stopLive();
   $('listToggle').focus();
 });
+
+const wallJobs = new Map();
+let wallObserver, wallRunning = 0;
+function wallParallel() { return state.city === 'hn' ? 2 : 8; }
+function stopWall() {
+  wallObserver?.disconnect();
+  for (const job of wallJobs.values()) job.loader.stop?.();
+  wallJobs.clear();
+  wallRunning = 0;
+}
+function pumpWall() {
+  while (wallRunning < wallParallel()) {
+    const job = [...wallJobs.values()].find(item => item.wanted && !item.started);
+    if (!job) return;
+    job.started = true;
+    wallRunning += 1;
+    job.loader.start();
+  }
+}
+function renderWall() {
+  if (!$('wallDialog').open) return;
+  const query = normalizeText($('wallSearch').value);
+  const cameras = state.cameras.filter(camera => !query || normalizeText(`${camera.name} ${camera.district || ''}`).includes(query));
+  $('wallCount').textContent = state.city === 'hn'
+    ? `${cameras.length} camera. Hà Nội tải chậm, tối đa 40 ảnh/phút.`
+    : `${cameras.length} camera`;
+  stopWall();
+  const grid = $('wallGrid');
+  wallObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      const job = wallJobs.get(entry.target.dataset.id);
+      if (!job) continue;
+      job.wanted = entry.isIntersecting;
+      if (!entry.isIntersecting && job.started) {
+        job.started = false;
+        wallRunning = Math.max(0, wallRunning - 1);
+        job.loader.stop();
+        pumpWall();
+      }
+    }
+    pumpWall();
+  }, {root: grid, rootMargin: '240px'});
+  const fragment = document.createDocumentFragment();
+  for (const camera of cameras) {
+    const tile = button('', () => openImage(camera), 'wall-tile');
+    tile.dataset.id = camera.id;
+    const frame = element('div', 'snapshot-frame');
+    const placeholder = element('p', 'empty', 'Đang chờ ảnh…');
+    frame.append(placeholder);
+    tile.append(frame, element('span', '', camera.name), element('small', '', camera.district || 'Chưa rõ khu vực'));
+    let image;
+    const loader = camera.snapshotUrl ? new SnapshotLoader({url: camera.snapshotUrl, onState: next => {
+      if (next.src && next.image && next.image !== image) {
+        next.image.alt = `Ảnh giao thông: ${camera.name}`;
+        image?.replaceWith(next.image);
+        if (!image) placeholder.replaceWith(next.image);
+        image = next.image;
+      }
+      if ((next.status === 'ready' || next.status === 'error') && wallJobs.get(camera.id)?.started) {
+        wallJobs.get(camera.id).started = false;
+        wallRunning = Math.max(0, wallRunning - 1);
+        pumpWall();
+      }
+      if (next.status === 'error' && !next.src) placeholder.textContent = 'Không có ảnh';
+    }}) : {start() {}, stop() {}};
+    wallJobs.set(camera.id, {loader, wanted: false, started: false});
+    fragment.append(tile);
+  }
+  if (!cameras.length) fragment.append(element('p', 'empty', state.catalogLoading ? 'Đang tải danh mục…' : 'Không có camera.'));
+  grid.replaceChildren(fragment);
+  for (const tile of grid.querySelectorAll('.wall-tile')) wallObserver.observe(tile);
+}
+function openWall() {
+  $('wallDialog').showModal();
+  $('wallToggle').setAttribute('aria-expanded', 'true');
+  renderWall();
+  $('wallClose').focus();
+}
+function closeWall() {
+  if ($('wallDialog').open) $('wallDialog').close();
+}
+$('wallToggle').addEventListener('click', () => { cancelMapPick(); openWall(); });
+$('wallClose').addEventListener('click', () => closeWall());
+$('wallDialog').addEventListener('close', () => {
+  stopWall();
+  $('wallToggle').setAttribute('aria-expanded', 'false');
+  $('wallToggle').focus();
+});
+$('wallSearch').addEventListener('input', renderWall);
 
 function selectedRoute() { return state.routes[state.selectedRoute]; }
 function visibleRows() {
@@ -368,6 +457,7 @@ async function reloadCameras() {
       $('catalogStatus').textContent = catalogText();
       $('catalogStatus').classList.toggle('error', Boolean(state.catalogError) || state.catalog?.source !== 'live');
       renderSidebar();
+      if ($('wallDialog').open) renderWall();
     }
   }
 }
@@ -651,6 +741,7 @@ document.addEventListener('visibilitychange', () => refresh.setVisible(!document
 document.addEventListener('keydown', event => { if (event.key === 'Escape' && picking) { cancelMapPick(); setPanel('panel', true, true); } });
 window.addEventListener('pagehide', () => {
   stopLive();
+  stopWall();
   basemap?.dispose();
   refresh.dispose(); routeRequest.cancel(); catalogRequest.cancel();
   Object.values(placeRequests).forEach(request => request.cancel()); clearTimeout(noticeTimer);
