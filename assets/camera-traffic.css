@@ -39,12 +39,6 @@ p { line-height: 1.5; }
 .brand .tagline { margin-top: var(--s1); color: var(--muted); font-size: .8125rem; }
 .maker { color: var(--accent); font-size: .8125rem; font-weight: 600; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
 .maker:hover { text-decoration: underline; }
-.maker-card { margin-top: var(--s6); padding-top: var(--s4); border-top: 1px solid var(--line); }
-.maker-card p + p { margin-top: var(--s2); }
-.maker-card a { color: var(--accent); font-weight: 600; text-decoration: none; }
-.maker-card a:hover { text-decoration: underline; }
-.maker-links { display: flex; flex-wrap: wrap; gap: var(--s3); font-size: .8125rem; }
-.maker-links a { min-height: 44px; display: inline-flex; align-items: center; }
 .app-header nav { display: flex; align-items: center; gap: var(--s2); }
 .city-select { display: flex; align-items: center; gap: var(--s2); color: var(--muted); font-size: .8125rem; }
 .city-select select { min-width: 7.5rem; }
