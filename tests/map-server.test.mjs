@@ -141,6 +141,11 @@ test('host allowlist stays loopback unless Vercel names the deployment', () => {
   assert.equal(isAllowedHost('cam.vercel.app'), false);
   assert.equal(isAllowedHost('cam.vercel.app', {VERCEL: '1', VERCEL_URL: 'cam.vercel.app'}), true);
   assert.equal(isAllowedHost('evil.vercel.app', {VERCEL: '1', VERCEL_URL: 'cam.vercel.app'}), false);
+  const productionAlias = {VERCEL: '1', VERCEL_PROJECT_NAME: 'camera-giaothong', VERCEL_PROJECT_PRODUCTION_URL: 'traffic.labs.io.vn'};
+  assert.equal(isAllowedHost('camera-giaothong.vercel.app', productionAlias), true);
+  assert.equal(isAllowedHost('traffic.labs.io.vn', productionAlias), true);
+  assert.equal(isAllowedHost('evil.vercel.app', productionAlias), false);
+  assert.equal(publicOrigin('camera-giaothong.vercel.app', productionAlias), 'https://camera-giaothong.vercel.app');
   assert.equal(isAllowedHost('maps.example.test', {VERCEL: '1', ALLOWED_HOST: 'maps.example.test'}), true);
   assert.equal(publicOrigin('127.0.0.1:8765'), 'http://127.0.0.1:8765');
   assert.equal(publicOrigin('cam.vercel.app', {VERCEL: '1', VERCEL_URL: 'cam.vercel.app'}), 'https://cam.vercel.app');

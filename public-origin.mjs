@@ -17,6 +17,8 @@ export function vercelHostnames(env = process.env) {
     const hostname = String(raw).trim().toLowerCase().replace(/^https?:\/\//, '').split('/')[0].split(':')[0];
     if (hostname && /^[a-z0-9.-]+$/.test(hostname) && !hostname.includes('..')) hosts.add(hostname);
   }
+  const project = String(env.VERCEL_PROJECT_NAME || '').trim().toLowerCase();
+  if (/^[a-z0-9-]+$/.test(project)) hosts.add(`${project}.vercel.app`);
   return hosts;
 }
 
