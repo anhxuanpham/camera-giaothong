@@ -35,7 +35,16 @@ p { line-height: 1.5; }
 .status:empty { display: none; }
 .error { color: var(--error) !important; }
 .app-header { position: fixed; inset: 0 0 auto; height: var(--header-height); z-index: 1100; display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s3) var(--s6); background: var(--bg); }
-.brand p { margin-top: var(--s1); color: var(--muted); font-size: .8125rem; }
+.brand-row { display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap; }
+.brand .tagline { margin-top: var(--s1); color: var(--muted); font-size: .8125rem; }
+.maker { color: var(--accent); font-size: .8125rem; font-weight: 600; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.maker:hover { text-decoration: underline; }
+.maker-card { margin-top: var(--s6); padding-top: var(--s4); border-top: 1px solid var(--line); }
+.maker-card p + p { margin-top: var(--s2); }
+.maker-card a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.maker-card a:hover { text-decoration: underline; }
+.maker-links { display: flex; flex-wrap: wrap; gap: var(--s3); font-size: .8125rem; }
+.maker-links a { min-height: 44px; display: inline-flex; align-items: center; }
 .app-header nav { display: flex; align-items: center; gap: var(--s2); }
 .city-select { display: flex; align-items: center; gap: var(--s2); color: var(--muted); font-size: .8125rem; }
 .city-select select { min-width: 7.5rem; }
@@ -131,7 +140,7 @@ summary { min-height: 44px; padding-block: var(--s3); font-size: .875rem; }
   :root { --header-height: 120px; }
   .app-header { flex-direction: column; align-items: stretch; justify-content: center; gap: var(--s2); padding: var(--s2) var(--s4); }
   .brand h1 { font-size: 1.1rem; }
-  .brand p { display: none; }
+  .brand .tagline { display: none; }
   .app-header nav { justify-content: space-between; }
   .app-header nav > button { flex: 1; }
   .refresh-toggle { padding-inline: var(--s1); }
@@ -146,7 +155,7 @@ summary { min-height: 44px; padding-block: var(--s3); font-size: .875rem; }
 @media (max-height: 560px) {
   :root { --header-height: 64px; }
   .app-header { flex-direction: row; padding-block: var(--s2); }
-  .brand p { display: none; }
+  .brand .tagline { display: none; }
   .panel { top: calc(var(--header-height) + var(--s2)); bottom: var(--s2); max-height: none; }
   .camera-panel { overflow: auto; }
   .camera-list { overflow: visible; flex: none; }

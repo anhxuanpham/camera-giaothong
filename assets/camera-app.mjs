@@ -612,7 +612,7 @@ function applyCityChrome() {
   const city = CITIES[state.city];
   const select = $('citySelect');
   if (select) select.value = state.city;
-  const subtitle = document.querySelector('.brand p');
+  const subtitle = document.querySelector('.brand .tagline');
   if (subtitle) subtitle.textContent = `${city.label} · Quan sát trước khi đi`;
   document.title = `Camera Giao Thông ${city.label}`;
   $('from').placeholder = city.fromPlaceholder;

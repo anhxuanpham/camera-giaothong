@@ -59,7 +59,11 @@ test('only app assets and key-free map configuration are exposed', async () => {
       assert.equal((await fetch(base + path)).status, 404);
     }
     assert.equal((await fetch(base + '/cameras_hanoi.json')).status, 200);
-    assert.match(await (await fetch(base + '/')).text(), /Camera Giao Thông/);
+    const html = await (await fetch(base + '/')).text();
+    assert.match(html, /Camera Giao Thông/);
+    assert.match(html, />William</);
+    assert.match(html, /https:\/\/will\.id\.vn/);
+    assert.match(html, /https:\/\/github\.com\/anhxuanpham/);
     assert.match((await fetch(base + '/assets/camera-app.mjs')).headers.get('content-type'), /javascript/);
   });
 });
