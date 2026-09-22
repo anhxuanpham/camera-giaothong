@@ -62,7 +62,7 @@ test('only app assets and key-free map configuration are exposed', async () => {
     const html = await (await fetch(base + '/')).text();
     assert.match(html, /Camera Giao Thông/);
     assert.match(html, />William</);
-    assert.match(html, /https:\/\/will\.id\.vn/);
+    assert.match(html, /https:\/\/labs\.io\.vn/);
     assert.match(html, /id="pickHere"/);
     assert.match(html, /id="wallToggle"/);
     assert.match(html, /id="wallDialog"/);

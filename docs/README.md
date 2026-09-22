@@ -1,6 +1,6 @@
 # Camera Giao Thông
 
-Ứng dụng web của [William](https://will.id.vn) ([GitHub](https://github.com/anhxuanpham), [LinkedIn](https://www.linkedin.com/in/26thmay/)) để chọn tuyến ô tô và xem camera giao thông gần đường đi tại **TP.HCM** và **Hà Nội**. Người dùng tự đánh giá tình hình từ ảnh; ứng dụng không đo mức độ ùn tắc. Bản công khai: [camera-giaothong.vercel.app](https://camera-giaothong.vercel.app).
+Ứng dụng web của [William](https://labs.io.vn) ([GitHub](https://github.com/anhxuanpham), [LinkedIn](https://www.linkedin.com/in/26thmay/)) để chọn tuyến ô tô và xem camera giao thông gần đường đi tại **TP.HCM** và **Hà Nội**. Người dùng tự đánh giá tình hình từ ảnh; ứng dụng không đo mức độ ùn tắc. Bản công khai: [camera-giaothong.vercel.app](https://camera-giaothong.vercel.app).
 
 Nút **Tường** mở một khung lưới mọi camera của thành phố đang chọn, mỗi camera một ô ảnh. Bấm ô để xem lớn. Hà Nội vẫn giới hạn 40 ảnh/phút.
 
