@@ -290,6 +290,7 @@ function renderWall() {
   for (const camera of cameras) {
     const tile = button('', () => openImage(camera), 'wall-tile');
     tile.dataset.id = camera.id;
+    const body = element('span', 'wall-body');
     const frame = element('div', 'snapshot-frame');
     if (camera.snapshotUrl) {
       const image = element('img');
@@ -300,7 +301,8 @@ function renderWall() {
       image.addEventListener('error', () => { image.replaceWith(element('p', 'empty', 'Không có ảnh')); });
       frame.append(image);
     } else frame.append(element('p', 'empty', 'Không có ảnh'));
-    tile.append(frame, element('span', 'wall-caption', camera.name), element('small', 'wall-district', camera.district || 'Chưa rõ khu vực'));
+    body.append(frame, element('span', 'wall-caption', camera.name), element('small', 'wall-district', camera.district || 'Chưa rõ khu vực'));
+    tile.append(body);
     fragment.append(tile);
   }
   if (!cameras.length) fragment.append(element('p', 'empty', state.catalogLoading ? 'Đang tải danh mục…' : 'Không có camera.'));

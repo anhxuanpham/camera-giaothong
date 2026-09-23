@@ -199,7 +199,8 @@ summary { min-height: 44px; padding-block: var(--s3); font-size: .875rem; font-w
 .wall-tools input { flex: 1; }
 .wall-tools p { flex: none; white-space: nowrap; }
 .wall-grid { flex: 1 1 auto; min-height: 0; overflow: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--s2); padding: var(--s3); align-content: start; }
-.wall-tile { display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0; height: auto; padding: 0; text-align: left; background: var(--raised); overflow: hidden; white-space: normal; min-width: 0; }
+.wall-tile { display: block; height: auto; padding: 0; text-align: left; background: var(--raised); overflow: visible; white-space: normal; min-width: 0; }
+.wall-body { display: flex; flex-direction: column; align-items: stretch; width: 100%; }
 .wall-tile .snapshot-frame { position: relative; flex: 0 0 auto; width: 100%; aspect-ratio: 16 / 9; height: auto; min-height: 0; margin: 0; border: 0; border-radius: 0; overflow: hidden; background: oklch(10% .01 255); }
 .wall-tile .snapshot-frame img { position: absolute; inset: 0; width: 100%; height: 100%; max-height: none; object-fit: cover; display: block; }
 .wall-caption, .wall-district { display: block; flex: 0 0 auto; overflow: visible; white-space: normal; overflow-wrap: anywhere; text-align: left; line-height: 1.35; }
