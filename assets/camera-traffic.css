@@ -199,11 +199,11 @@ summary { min-height: 44px; padding-block: var(--s3); font-size: .875rem; font-w
 .wall-tools input { flex: 1; }
 .wall-tools p { flex: none; white-space: nowrap; }
 .wall-grid { flex: 1 1 auto; min-height: 0; overflow: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--s2); padding: var(--s3); align-content: start; }
-.wall-tile { display: grid; grid-template-rows: auto auto auto; gap: var(--s1); padding: 0 0 var(--s2); text-align: left; background: var(--bg); overflow: hidden; min-width: 0; min-height: 168px; }
-.wall-tile .snapshot-frame { min-height: 112px; aspect-ratio: 16 / 9; margin: 0; border: 0; border-radius: 0; background: oklch(10% .01 255); }
+.wall-tile { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 0 0 var(--s2); text-align: left; background: var(--bg); overflow: visible; min-width: 0; height: auto; }
+.wall-tile .snapshot-frame { flex: none; width: 100%; aspect-ratio: 16 / 9; min-height: 0; margin: 0; border: 0; border-radius: 0; overflow: hidden; background: oklch(10% .01 255); }
 .wall-tile img { max-height: none; width: 100%; height: 100%; object-fit: cover; display: block; }
-.wall-tile span, .wall-tile small { display: block; padding-inline: var(--s2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.wall-tile small { color: var(--muted); font-size: .75rem; font-weight: 500; }
+.wall-tile span, .wall-tile small { display: block; padding: var(--s2) var(--s2) 0; overflow: visible; text-overflow: unset; white-space: normal; overflow-wrap: anywhere; line-height: 1.35; }
+.wall-tile small { color: var(--muted); font-size: .75rem; font-weight: 500; padding-bottom: var(--s2); }
 #imageContent, #liveContent { padding: var(--s4); }
 #imageDialog .snapshot-frame img { max-height: 60dvh; }
 #imageDialog .snapshot-frame { min-height: 200px; }
