@@ -298,17 +298,17 @@ function renderWall() {
       event.preventDefault();
       openImage(camera);
     });
-    const body = element('span', 'wall-body');
     if (camera.snapshotUrl) {
+      const photo = element('div', 'wall-photo');
       const image = element('img', 'wall-shot');
       image.alt = '';
       image.loading = 'lazy';
       image.decoding = 'async';
       image.src = camera.snapshotUrl;
-      body.append(image);
-    } else body.append(element('p', 'empty', 'Không có ảnh'));
-    body.append(element('span', 'wall-caption', camera.name), element('small', 'wall-district', camera.district || 'Chưa rõ khu vực'));
-    tile.append(body);
+      photo.append(image);
+      tile.append(photo);
+    } else tile.append(element('p', 'empty', 'Không có ảnh'));
+    tile.append(element('span', 'wall-caption', camera.name), element('small', 'wall-district', camera.district || 'Chưa rõ khu vực'));
     fragment.append(tile);
   }
   if (!cameras.length) fragment.append(element('p', 'empty', state.catalogLoading ? 'Đang tải danh mục…' : 'Không có camera.'));
