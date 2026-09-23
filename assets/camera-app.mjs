@@ -300,7 +300,7 @@ function renderWall() {
       image.addEventListener('error', () => { image.replaceWith(element('p', 'empty', 'Không có ảnh')); });
       frame.append(image);
     } else frame.append(element('p', 'empty', 'Không có ảnh'));
-    tile.append(frame, element('span', '', camera.name), element('small', '', camera.district || 'Chưa rõ khu vực'));
+    tile.append(frame, element('span', 'wall-caption', camera.name), element('small', 'wall-district', camera.district || 'Chưa rõ khu vực'));
     fragment.append(tile);
   }
   if (!cameras.length) fragment.append(element('p', 'empty', state.catalogLoading ? 'Đang tải danh mục…' : 'Không có camera.'));
