@@ -63,7 +63,7 @@ Trước khi đưa bản đồ vào sử dụng chính thức, đối chiếu Ho
 
 - Thời gian đi đường là ước tính cho **ô tô**, chưa tính kẹt xe trực tiếp; không phải chỉ dẫn dành cho xe máy.
 - Camera gần tuyến có thể ở đường khác hoặc nhìn hướng khác. Khoảng cách và thứ tự A–B không xác nhận đúng làn xe; số camera không thể hiện độ thông thoáng.
-- **Tải thành công lúc…** là giờ trình duyệt nhận ảnh, không phải giờ camera chụp. Nguồn chưa cung cấp giờ chụp được xác nhận, nên ảnh có thể trễ.
+- **Nhận lúc…** là giờ trình duyệt tải xong file JPEG. Giờ in trên khung hình (ví dụ `23.Sep.2026 13:44:59`) là đồng hồ camera; Notis không gửi giờ chụp trong header hay EXIF. Hai mốc có thể lệch vài giây.
 - Khi không tải được danh mục mới, ứng dụng có thể giữ danh mục trong phiên hoặc dùng [danh mục lưu sẵn](../cameras_full.json), chưa rõ ngày thu thập. Trạng thái nguồn được hiển thị trong bảng Camera; danh mục tải được không chứng minh mọi camera đang hoạt động. Nếu không có danh mục, vẫn có thể tìm đường.
 - Cần kết nối tới Notis (camera HCM), CDS Hà Nội qua máy chủ local `/api/hanoi/cameras` (danh mục HN), VMS Viettel qua `/api/hanoi/snapshot/{id}` và `/api/hanoi/live/{id}` (ảnh + live HN), NDA Maps (bản đồ nền và địa điểm), OSRM (tuyến ô tô) và CDN unpkg (thư viện bản đồ). Nếu CDS lỗi, Hà Nội dùng [danh mục lưu sẵn](../cameras_hanoi.json) cho vị trí; ảnh/live vẫn cần VMS. Thiếu ffmpeg thì danh sách HN vẫn mở, live/ảnh báo chưa giải mã được. MapLibre chỉ là thư viện vẽ lớp vector, không phải nguồn dữ liệu địa lý. OSRM vẫn cung cấp hình học tuyến, không sở hữu nhãn hay đường biên trên lớp nền. Danh mục camera lưu sẵn không biến ứng dụng thành bản dùng ngoại tuyến; dịch vụ ngoài có thể lỗi hoặc thay đổi.
 

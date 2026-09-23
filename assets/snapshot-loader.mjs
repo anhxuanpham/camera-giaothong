@@ -1,5 +1,17 @@
 // Keep the last successful frame visible while the next one loads. A clock tick
 // never proves capture time; only an image load can advance the download time.
+// Notis JPEGs burn the camera clock into pixels and do not send Last-Modified or EXIF.
+
+export const HCM_CAPTURE_NOTE = 'Giờ in trên ảnh là đồng hồ camera. Dòng trạng thái là lúc trình duyệt nhận file, có thể lệch vài giây.';
+export const HN_CAPTURE_NOTE = 'Ảnh Hà Nội là một khung giải mã từ luồng VMS. Dòng trạng thái là lúc trình duyệt nhận file.';
+
+export function snapshotStatusText({status, loadedAt, error, hasSrc, formatTime}) {
+  const received = loadedAt != null && formatTime ? `Nhận lúc ${formatTime(loadedAt)}.` : '';
+  if (status === 'loading') return received ? `${received} Đang tải ảnh mới…` : 'Đang tải ảnh mới…';
+  if (status === 'error') return `${error || 'Không tải được ảnh mới.'} ${hasSrc ? `Đang giữ ảnh cũ. ${received}` : ''}`.trim();
+  return received;
+}
+
 export class SnapshotLoader {
   constructor({url, onState, imageFactory = () => new Image(), now = () => Date.now(), timeoutMs = 12000,
     schedule = (fn, ms) => setTimeout(fn, ms), unschedule = id => clearTimeout(id)}) {

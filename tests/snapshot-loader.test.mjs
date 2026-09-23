@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {SnapshotLoader, SnapshotRefresh} from '../assets/snapshot-loader.mjs';
+import {SnapshotLoader, SnapshotRefresh, snapshotStatusText, HCM_CAPTURE_NOTE} from '../assets/snapshot-loader.mjs';
 function harness() {
   const images = [], states = [], timers = new Map(); let clock = 100, timerId = 0;
   const loader = new SnapshotLoader({url: 'https://api.notis.vn/v4/cameras/id/snapshot', now: () => clock++, onState: state => states.push(state),
@@ -8,6 +8,14 @@ function harness() {
     schedule: callback => {timers.set(++timerId, callback); return timerId;}, unschedule: id => timers.delete(id)});
   return {loader, images, states, timers};
 }
+test('status copy names receive time and does not claim the camera clock is unknown', () => {
+  const formatTime = value => `T${value}`;
+  assert.match(HCM_CAPTURE_NOTE, /đồng hồ camera/);
+  assert.equal(snapshotStatusText({status: 'ready', loadedAt: 5, formatTime}), 'Nhận lúc T5.');
+  assert.match(snapshotStatusText({status: 'loading', loadedAt: 5, formatTime}), /Nhận lúc T5/);
+  assert.equal(snapshotStatusText({status: 'loading'}), 'Đang tải ảnh mới…');
+  assert.match(snapshotStatusText({status: 'error', error: 'Lỗi.', hasSrc: true, loadedAt: 5, formatTime}), /Đang giữ ảnh cũ/);
+});
 test('success time only advances when a real image load completes, not on refresh', () => {
   const {loader, images} = harness(); loader.start();
   assert.equal(loader.state.loadedAt, null); assert.equal(loader.state.status, 'loading');

@@ -1,7 +1,7 @@
 import {CAMERA_RADIUS_METERS, CITY_NEAR_KM, FAVORITES_KEY, PINS_KEY, CITY_KEY, CITIES, normalizeCity, normalizeText, nearestCity, geolocationMessage, validCoordinates, normalizeFavorites, normalizePins, favoriteKey,
   readStored, writeStored, camerasAlongRoute, filterCameraRows, LatestRequest, safeHanoiLiveUrl, hanoiCameraId} from './camera-core.mjs';
 import {loadCatalog, searchPlaces, resolvePlace, getRoutes} from './camera-api.mjs';
-import {SnapshotLoader, SnapshotRefresh} from './snapshot-loader.mjs';
+import {SnapshotLoader, SnapshotRefresh, snapshotStatusText, HCM_CAPTURE_NOTE, HN_CAPTURE_NOTE} from './snapshot-loader.mjs';
 import {VietnamBasemap} from './vietnam-basemap.mjs';
 import {attachHanoiLive} from './hanoi-live.mjs';
 
@@ -149,7 +149,7 @@ function cameraView(camera, large = false) {
     : 'Camera này chưa có đường dẫn ảnh hợp lệ.');
   frame.append(image, placeholder);
   const status = element('p', 'status'); status.setAttribute('role', 'status');
-  const note = element('p', 'muted capture-note', 'Chưa xác định giờ chụp từ nguồn. Ảnh có thể trễ.');
+  const note = element('p', 'muted capture-note', HCM_CAPTURE_NOTE);
   const storageMessage = element('p', 'status error storage-message'); storageMessage.setAttribute('role', 'status');
   let displayedSrc;
   const onSnapshotState = next => {
@@ -168,9 +168,8 @@ function cameraView(camera, large = false) {
     refreshButton.disabled = next.status === 'loading';
     refreshButton.textContent = next.status === 'loading' ? 'Đang tải…' : 'Làm mới ảnh';
     status.classList.toggle('error', next.status === 'error');
-    const last = next.loadedAt ? `Tải thành công lúc ${time(next.loadedAt)}.` : '';
-    status.textContent = next.status === 'loading' ? `${last} Đang tải ảnh mới…` :
-      next.status === 'error' ? `${next.error} ${next.src ? `Đang giữ ảnh cũ. ${last}` : ''}` : last;
+    status.textContent = snapshotStatusText({status: next.status, loadedAt: next.loadedAt, error: next.error,
+      hasSrc: Boolean(next.src), formatTime: time});
     placeholder.textContent = next.status === 'error' ? 'Chưa có ảnh để hiển thị.' : 'Đang tải ảnh camera…';
     if (currentPopup?.isOpen() && popupViews.get(currentPopup)?.root === root) currentPopup.update();
   };
@@ -180,7 +179,7 @@ function cameraView(camera, large = false) {
   if (!camera.snapshotUrl) {
     status.textContent = 'Camera này chưa có đường dẫn ảnh hợp lệ.';
   } else if (camera.city === 'hn') {
-    note.textContent = 'Ảnh Hà Nội là một khung giải mã từ luồng VMS. Không phải JPEG Notis như HCM.';
+    note.textContent = HN_CAPTURE_NOTE;
   }
   const actions = element('div', 'camera-actions');
   const refreshButton = button('Làm mới ảnh', () => loader.refresh());
