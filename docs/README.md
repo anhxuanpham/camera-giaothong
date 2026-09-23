@@ -2,7 +2,7 @@
 
 Ứng dụng web của [William](https://labs.io.vn) ([GitHub](https://github.com/anhxuanpham), [LinkedIn](https://www.linkedin.com/in/26thmay/)) để chọn tuyến ô tô và xem camera giao thông gần đường đi tại **TP.HCM** và **Hà Nội**. Người dùng tự đánh giá tình hình từ ảnh; ứng dụng không đo mức độ ùn tắc. Bản công khai: [camera-giaothong.vercel.app](https://camera-giaothong.vercel.app).
 
-Nút **Tường** mở một khung lưới mọi camera của thành phố đang chọn, mỗi camera một ô ảnh. Bấm ô để xem lớn. Hà Nội vẫn giới hạn 40 ảnh/phút.
+Nút **Tường** mở lưới mọi camera của thành phố đang chọn. Ô đang nhìn thấy tự tải ảnh mới mỗi 15 giây (Hà Nội tối đa 8 ô/lần vì giới hạn 40 ảnh/phút). Bấm ô để xem lớn.
 
 Nút **Vị trí** góc phải bản đồ lấy GPS, hiện chấm vị trí, kéo bản đồ tới đó. Gần Hà Nội thì đổi thành phố. Trong lúc chọn điểm A/B có **Vị trí hiện tại**. Trình duyệt sẽ hỏi quyền vị trí.
 

@@ -279,11 +279,38 @@ $('liveDialog').addEventListener('close', () => {
   $('listToggle').focus();
 });
 
-function stopWall() {}
+let wallTimer = null;
+function stopWall() {
+  if (wallTimer) { clearInterval(wallTimer); wallTimer = null; }
+}
+function visibleWallShots() {
+  const root = $('wallGrid');
+  const view = root.getBoundingClientRect();
+  return [...root.querySelectorAll('.wall-shot')].filter(image => {
+    const box = image.getBoundingClientRect();
+    return box.bottom > view.top && box.top < view.bottom && image.dataset.src;
+  });
+}
+function refreshWallShots() {
+  if (!$('wallDialog').open) return;
+  const shots = visibleWallShots();
+  const limit = state.city === 'hn' ? 8 : shots.length;
+  for (const image of shots.slice(0, limit)) {
+    const next = new URL(image.dataset.src, location.href);
+    next.searchParams.set('t', String(Date.now()));
+    const probe = new Image();
+    probe.onload = () => { if (image.isConnected) image.src = probe.src; };
+    probe.src = next.href;
+  }
+}
+function startWallRefresh() {
+  stopWall();
+  wallTimer = setInterval(refreshWallShots, 15000);
+}
 function renderWall() {
   const query = normalizeText($('wallSearch').value);
   const cameras = state.cameras.filter(camera => !query || normalizeText(`${camera.name} ${camera.district || ''}`).includes(query));
-  $('wallCount').textContent = `${cameras.length} camera`;
+  $('wallCount').textContent = `${cameras.length} camera · ô đang xem làm mới mỗi 15s`;
   const grid = $('wallGrid');
   const fragment = document.createDocumentFragment();
   for (const camera of cameras) {
@@ -303,6 +330,7 @@ function renderWall() {
       image.alt = '';
       image.loading = 'lazy';
       image.decoding = 'async';
+      image.dataset.src = camera.snapshotUrl;
       image.src = camera.snapshotUrl;
       photo.append(image);
       tile.append(photo);
@@ -317,6 +345,7 @@ function openWall() {
   $('wallDialog').showModal();
   $('wallToggle').setAttribute('aria-expanded', 'true');
   renderWall();
+  startWallRefresh();
   $('wallClose').focus();
 }
 function closeWall() {
@@ -699,7 +728,11 @@ $('showCameras').addEventListener('change', renderCameraLayer);
 $('moreCameras').addEventListener('click', () => { state.listLimit += 40; renderSidebar(); });
 $('autoRefresh').addEventListener('change', () => refresh.setEnabled($('autoRefresh').checked));
 smallScreen.addEventListener('change', () => { if (smallScreen.matches && !$('sidebar').hidden) setPanel('panel', false); });
-document.addEventListener('visibilitychange', () => refresh.setVisible(!document.hidden));
+document.addEventListener('visibilitychange', () => {
+  refresh.setVisible(!document.hidden);
+  if (document.hidden) stopWall();
+  else if ($('wallDialog').open) startWallRefresh();
+});
 document.addEventListener('keydown', event => { if (event.key === 'Escape' && picking) { cancelMapPick(); setPanel('panel', true, true); } });
 window.addEventListener('pagehide', () => {
   stopLive();
