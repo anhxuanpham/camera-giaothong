@@ -183,7 +183,7 @@ export function createRequestListener(options = {}) {
       const type = publicFiles.get(path);
       if (!type) return message(res, 404, {error: 'Không tìm thấy tài nguyên.'});
       const body = await readFile(join(staticRoot(env), path.slice(1)));
-      res.writeHead(200, {'Content-Type': type, 'Cache-Control': 'no-cache', 'X-Content-Type-Options': 'nosniff'});
+      res.writeHead(200, {'Content-Type': type, 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff'});
       res.end(req.method === 'HEAD' ? undefined : body);
     } catch { if (!res.destroyed) message(res, 500, {error: 'Không tải được tài nguyên.'}); }
   };

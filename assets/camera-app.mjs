@@ -288,8 +288,16 @@ function renderWall() {
   const grid = $('wallGrid');
   const fragment = document.createDocumentFragment();
   for (const camera of cameras) {
-    const tile = button('', () => openImage(camera), 'wall-tile');
+    const tile = element('div', 'wall-tile');
     tile.dataset.id = camera.id;
+    tile.tabIndex = 0;
+    tile.setAttribute('role', 'button');
+    tile.addEventListener('click', () => openImage(camera));
+    tile.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      openImage(camera);
+    });
     const body = element('span', 'wall-body');
     if (camera.snapshotUrl) {
       const image = element('img', 'wall-shot');
